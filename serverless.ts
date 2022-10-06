@@ -5,10 +5,13 @@ import hello from '@functions/hello';
 const serverlessConfiguration: AWS = {
   service: 'employee-service',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
-  provider: {
+  plugins: ['serverless-esbuild', 'serverless-offline'],
+  provider: { 
     name: 'aws',
-    runtime: 'nodejs14.x',
+    runtime: 'nodejs16.x', 
+    profile: 'sls-employee-service',
+    stage: 'dev',
+    stackName: '${self:service}-stack-${self:provider.stage}',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
@@ -27,7 +30,7 @@ const serverlessConfiguration: AWS = {
       minify: false,
       sourcemap: true,
       exclude: ['aws-sdk'],
-      target: 'node14',
+      target: 'node16',
       define: { 'require.resolve': undefined },
       platform: 'node',
       concurrency: 10,
