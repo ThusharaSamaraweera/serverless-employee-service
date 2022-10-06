@@ -1,6 +1,13 @@
+src/config
+
 # package directories
 node_modules
 jspm_packages
+
+# IDE directories
+.idea
+.git
+.vscode
 
 # Serverless directories
 .serverless
