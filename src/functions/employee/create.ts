@@ -2,7 +2,7 @@ import type { ValidatedEventAPIGatewayProxyEvent } from "@libs/api-gateway";
 import { successResponse } from "@libs/api-gateway";
 import { middyfy } from "@libs/lambda";
 import { Employee } from "src/entities/employee.entity";
-import create from "./employee-service";
+import {create} from "./employee-service";
 
 import schema from "./schema";
 
@@ -13,7 +13,7 @@ const createEmployee: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async 
   const savedEmployee = await create(employee);
 
   return successResponse({
-    employee
+    savedEmployee
   });
 };
 

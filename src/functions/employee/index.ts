@@ -1,7 +1,7 @@
 import { handlerPath } from "@libs/handler-resolver";
 import schema from "./schema";
 
-export default {
+const create = {
   handler: `${handlerPath(__dirname)}/create.main`,
   events: [
     {
@@ -17,3 +17,17 @@ export default {
     },
   ],
 };
+
+const fetch = {
+  handler: `${handlerPath(__dirname)}/create.main`,
+  events: [
+    {
+      http: {
+        method: "get",
+        path: "employees/{id}",
+      },
+    },
+  ],
+};
+
+export {create, fetch};

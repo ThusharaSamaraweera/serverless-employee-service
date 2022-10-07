@@ -15,4 +15,18 @@ const create = async (employee: Employee): Promise<Employee> => {
   return newEmployee;
 };
 
-export default create;
+const fetch = async (employeeId: string): Promise<Employee> => {
+  const employeeRepository = await (
+    await getDBConnection()
+  ).getRepository(Employee);
+  const newEmployee: Employee = await employeeRepository
+    .findOneBy({id: employeeId})
+    .catch((error) => {
+      console.error("Failed to fetch employee: ", error);
+      throw new Error(error);
+    });
+
+  return newEmployee;
+};
+
+export {create, fetch};
