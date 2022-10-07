@@ -1,3 +1,4 @@
+import { Employee } from "src/entities/employee.entity";
 import { DataSource, EntityManager } from "typeorm";
 
 let dataSource: DataSource;
@@ -21,7 +22,7 @@ const getDBConnection = async (): Promise<EntityManager> => {
       synchronize: true,
       logging: false,
       useUTC: true,
-      entities: [],
+      entities: [ Employee],
     });
 
     return await dataSource

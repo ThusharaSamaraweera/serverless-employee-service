@@ -7,13 +7,15 @@ export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<ValidatedAPIGatewayP
 export const successResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 200,
+    isBase64Encoded: false,
     body: JSON.stringify(response)
   }
 }
 
-export const errorResponse = (response: Record<string, unknown>) => {
+export const clientResponse = (response: Record<string, unknown>) => {
   return {
     statusCode: 400,
+    isBase64Encoded: false,
     body: JSON.stringify(response),
   };
 };
