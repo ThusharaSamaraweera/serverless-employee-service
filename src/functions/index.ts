@@ -1,8 +1,8 @@
 import hello from './hello';
-import {create, fetch} from './employee'
+import {create, fetch, fetchAll} from './employee'
 
 const functions = {
-  hello, create, fetch
+  hello, create, fetch, fetchAll
 };
 
 export default functions;

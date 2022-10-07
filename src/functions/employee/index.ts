@@ -13,13 +13,14 @@ const create = {
             "application/json": schema,
           },
         },
+        private: true,
       },
     },
   ],
 };
 
 const fetch = {
-  handler: `${handlerPath(__dirname)}/create.main`,
+  handler: `${handlerPath(__dirname)}/fetch.main`,
   events: [
     {
       http: {
@@ -30,4 +31,16 @@ const fetch = {
   ],
 };
 
-export {create, fetch};
+const fetchAll = {
+  handler: `${handlerPath(__dirname)}/fetchAll.main`,
+  events: [
+    {
+      http: {
+        method: "get",
+        path: "employees",
+      },
+    },
+  ],
+};
+
+export {create, fetch, fetchAll};

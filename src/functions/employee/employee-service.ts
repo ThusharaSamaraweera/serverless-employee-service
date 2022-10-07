@@ -19,14 +19,28 @@ const fetch = async (employeeId: string): Promise<Employee> => {
   const employeeRepository = await (
     await getDBConnection()
   ).getRepository(Employee);
-  const newEmployee: Employee = await employeeRepository
+  const employee: Employee = await employeeRepository
     .findOneBy({id: employeeId})
     .catch((error) => {
       console.error("Failed to fetch employee: ", error);
       throw new Error(error);
     });
 
-  return newEmployee;
+  return employee;
 };
 
-export {create, fetch};
+const fetchAll = async (): Promise<Employee[]> => {
+  const employeeRepository = await (
+    await getDBConnection()
+  ).getRepository(Employee);
+  const employees: Employee[] = await employeeRepository
+    .find()
+    .catch((error) => {
+      console.error("Failed to fetch employees: ", error);
+      throw new Error(error);
+    });
+
+  return employees;
+};
+
+export {create, fetch, fetchAll};
