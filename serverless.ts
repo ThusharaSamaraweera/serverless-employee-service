@@ -1,7 +1,6 @@
 import type { AWS } from "@serverless/typescript";
 
 import functions from "@functions/index";
-import {DB_HOST, DB_PASSWORD} from "./src/config/constants";
 
 const serverlessConfiguration: AWS = {
   service: "employee-service",
@@ -26,12 +25,18 @@ const serverlessConfiguration: AWS = {
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
       NODE_OPTIONS: "--enable-source-maps --stack-trace-limit=1000",
-      DB_HOST: DB_HOST,
-      DB_PORT: "5432",
-      DB_NAME: "employee-service",
-      DB_USER: "postgres",
-      DB_PASSWORD: DB_PASSWORD,
-      DB_SCHEMA: "public",
+      DB_HOST:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/hostname1}",
+      DB_PORT:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/port1}",
+      DB_NAME:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/database1}",
+      DB_USER:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/username1}",
+      DB_PASSWORD:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/password1}",
+      DB_SCHEMA:
+        "${ssm:/project/employee-service/${self:provider.stage}/database/pg/schema1}",
     },
   },
   // import the function via paths
